@@ -4328,7 +4328,7 @@ func (inputChatPhotoAnimation *InputChatPhotoAnimation) GetInputChatPhotoEnum() 
 // User Represents a user
 type User struct {
 	tdCommon
-	ID                int32         `json:"id"`                 // User identifier
+	ID                int64         `json:"id"`                 // User identifier
 	FirstName         string        `json:"first_name"`         // First name of the user
 	LastName          string        `json:"last_name"`          // Last name of the user
 	Username          string        `json:"username"`           // Username of the user
