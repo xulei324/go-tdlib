@@ -693,7 +693,7 @@ func (client *Client) GetMe() (*User, error) {
 
 // GetUser Returns information about a user by their identifier. This is an offline request if the current user is not a bot
 // @param userID User identifier
-func (client *Client) GetUser(userID int32) (*User, error) {
+func (client *Client) GetUser(userID int64) (*User, error) {
 	result, err := client.SendAndCatch(UpdateData{
 		"@type":   "getUser",
 		"user_id": userID,
@@ -715,7 +715,7 @@ func (client *Client) GetUser(userID int32) (*User, error) {
 
 // GetUserFullInfo Returns full information about a user by their identifier
 // @param userID User identifier
-func (client *Client) GetUserFullInfo(userID int32) (*UserFullInfo, error) {
+func (client *Client) GetUserFullInfo(userID int64) (*UserFullInfo, error) {
 	result, err := client.SendAndCatch(UpdateData{
 		"@type":   "getUserFullInfo",
 		"user_id": userID,

@@ -301,7 +301,6 @@ const (
 	InlineKeyboardButtonTypeBuyType                  InlineKeyboardButtonTypeEnum = "inlineKeyboardButtonTypeBuy"
 )
 
-
 // ReplyMarkupEnum Alias for abstract ReplyMarkup 'Sub-Classes', used as constant-enum here
 type ReplyMarkupEnum string
 
@@ -5975,7 +5974,7 @@ func (secretChat *SecretChat) UnmarshalJSON(b []byte) error {
 // MessageSenderUser The message was sent by a known user
 type MessageSenderUser struct {
 	tdCommon
-	UserID int32 `json:"user_id"` // Identifier of the user that sent the message
+	UserID int64 `json:"user_id"` // Identifier of the user that sent the message
 }
 
 // MessageType return the string telegram-type of MessageSenderUser
@@ -5986,7 +5985,7 @@ func (messageSenderUser *MessageSenderUser) MessageType() string {
 // NewMessageSenderUser creates a new MessageSenderUser
 //
 // @param userID Identifier of the user that sent the message
-func NewMessageSenderUser(userID int32) *MessageSenderUser {
+func NewMessageSenderUser(userID int64) *MessageSenderUser {
 	messageSenderUserTemp := MessageSenderUser{
 		tdCommon: tdCommon{Type: "messageSenderUser"},
 		UserID:   userID,
@@ -6320,11 +6319,11 @@ func (messageInteractionInfo *MessageInteractionInfo) MessageType() string {
 // UnmarshalJSON unmarshal to json
 func (messageReplyInfo *MessageReplyInfo) UnmarshalJSON(data []byte) error {
 	var tmp struct {
-		ReplyCount              int32             `json:"reply_count"`
+		ReplyCount              int32              `json:"reply_count"`
 		RecentRepliers          []*json.RawMessage `json:"recent_repliers"`
-		LastReadInboxMessageId  int64             `json:"last_read_inbox_message_id"`
-		LastReadOutboxMessageId int64             `json:"last_read_outbox_message_id"`
-		LastMessageId           int64             `json:"last_message_id"`
+		LastReadInboxMessageId  int64              `json:"last_read_inbox_message_id"`
+		LastReadOutboxMessageId int64              `json:"last_read_outbox_message_id"`
+		LastMessageId           int64              `json:"last_message_id"`
 	}
 
 	err := json.Unmarshal(data, &tmp)
@@ -6425,7 +6424,7 @@ func (messageSendingStateFailed *MessageSendingStateFailed) GetMessageSendingSta
 type Message struct {
 	tdCommon
 	ID                      int64                   `json:"id"`                           // Message identifier; unique for the chat to which the message belongs
-	SenderID                MessageSender           `json:"sender_id"`                       // The sender of the message
+	SenderID                MessageSender           `json:"sender_id"`                    // The sender of the message
 	ChatID                  int64                   `json:"chat_id"`                      // Chat identifier
 	SendingState            MessageSendingState     `json:"sending_state"`                // Information about the sending state of the message; may be null
 	SchedulingState         MessageSchedulingState  `json:"scheduling_state"`             // Information about the scheduling state of the message; may be null
@@ -6497,7 +6496,7 @@ func NewMessage(iD int64, sender MessageSender, chatID int64, sendingState Messa
 	messageTemp := Message{
 		tdCommon:                tdCommon{Type: "message"},
 		ID:                      iD,
-		SenderID:                 sender,
+		SenderID:                sender,
 		ChatID:                  chatID,
 		SendingState:            sendingState,
 		SchedulingState:         schedulingState,
@@ -6892,7 +6891,7 @@ func (draftMessage *DraftMessage) UnmarshalJSON(b []byte) error {
 // ChatTypePrivate An ordinary chat with a user
 type ChatTypePrivate struct {
 	tdCommon
-	UserID int32 `json:"user_id"` // User identifier
+	UserID int64 `json:"user_id"` // User identifier
 }
 
 // MessageType return the string telegram-type of ChatTypePrivate
@@ -6903,7 +6902,7 @@ func (chatTypePrivate *ChatTypePrivate) MessageType() string {
 // NewChatTypePrivate creates a new ChatTypePrivate
 //
 // @param userID User identifier
-func NewChatTypePrivate(userID int32) *ChatTypePrivate {
+func NewChatTypePrivate(userID int64) *ChatTypePrivate {
 	chatTypePrivateTemp := ChatTypePrivate{
 		tdCommon: tdCommon{Type: "chatTypePrivate"},
 		UserID:   userID,
